@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.mercadona.pruebat.base</groupId>
+  <artifactId>pruebat-back-web-base</artifactId>
+  <version>0.0.0</version>
+  <packaging>pom</packaging>
+  <name>pruebat-back-web-base</name>
+
+  <!-- Provides dependency and plugin management for the given Spring Boot version -->
+  <parent>
+    <groupId>com.mercadona.framework.cna</groupId>
+    <artifactId>fwkcna-parent</artifactId>
+    <version>5.1.0</version>
+  </parent>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.mercadona.pruebat.base</groupId>
+        <artifactId>pruebat-back-web-base-api-rest</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mercadona.pruebat.base</groupId>
+        <artifactId>pruebat-back-web-base-application</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mercadona.pruebat.base</groupId>
+        <artifactId>pruebat-back-web-base-postgres-repository</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <modules>
+    <!-- Core application-->
+    <module>application</module>
+    <!-- Adapter implementations-->
+    <module>driving/api-rest</module>
+    <module>driven/postgres-repository</module>
+    <!-- Runtime -->
+    <module>boot</module>
+  </modules>
+
+</project>

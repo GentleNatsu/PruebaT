@@ -1,0 +1,39 @@
+networks:
+  local:
+    name: my-web-network
+services:
+  db_postgres_pruebate:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: sa
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: examples
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgres15-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - local
+
+  te-app:
+    container_name: java-app
+    image: promote:1.0
+    build:
+      context: ../../
+      dockerfile: devops/docker/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      JAVA_OPTS: "-Xmx512m"
+      SPRING_PROFILES_ACTIVE: "docker"
+    depends_on:
+      - db_postgres_pruebate
+    networks:
+      - local
+
+volumes:
+  postgresql:
+  postgres15-data:
+    driver: local
+
