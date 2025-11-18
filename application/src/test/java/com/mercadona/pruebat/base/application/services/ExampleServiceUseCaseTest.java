@@ -1,7 +1,7 @@
 package com.mercadona.pruebat.base.application.services;
 
 import com.mercadona.pruebat.base.domain.Example;
-import com.mercadona.pruebat.base.application.exceptions.ExampleNotFoundException;
+import com.mercadona.pruebat.base.application.exception.ExampleNotFoundException;
 import com.mercadona.pruebat.base.application.ports.driving.ExampleServicePort;
 import com.mercadona.pruebat.base.application.ports.driven.ExampleRepositoryPort;
 import com.mercadona.pruebat.base.domain.IdentificationTypesEnum;

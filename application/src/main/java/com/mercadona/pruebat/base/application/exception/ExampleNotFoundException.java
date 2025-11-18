@@ -1,4 +1,4 @@
-package com.mercadona.pruebat.base.application.exceptions;
+package com.mercadona.pruebat.base.application.exception;
 
 import com.mercadona.framework.cna.commons.domain.MercadonaBusinessException;
 

@@ -6,10 +6,15 @@ spring:
     enabled: true
 
   datasource:
-    url: jdbc:postgresql://my-web-network:5432/examples
+    url: jdbc:postgresql://db_postgres_pruebate:5432/examples
     username: sa
     password: root
     driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      format_sql: false
+      ddl-auto: none
 
 # Actuator endpoints configuration
 management:

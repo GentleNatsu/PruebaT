@@ -4,7 +4,7 @@ package com.mercadona.pruebat.base.driving.controllers.adapters;
 import com.mercadona.pruebat.base.domain.Example;
 import com.mercadona.pruebat.base.application.ports.driving.ExampleServicePort;
 import com.mercadona.pruebat.base.domain.IdentificationTypesEnum;
-import com.mercadona.pruebat.base.application.exceptions.ExampleNotFoundException;
+import com.mercadona.pruebat.base.application.exception.ExampleNotFoundException;
 import com.mercadona.pruebat.base.driving.controllers.mappers.ExampleDTOMapper;
 
 import com.mercadona.framework.cna.api.demotest.arq.web.model.*;
@@ -13,7 +13,6 @@ import com.mercadona.framework.cna.lib.error.handler.handlers.DefaultExceptionHa
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.mercadona.pruebat.base.driving.controllers.adapters.ExampleControllerAdapter;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

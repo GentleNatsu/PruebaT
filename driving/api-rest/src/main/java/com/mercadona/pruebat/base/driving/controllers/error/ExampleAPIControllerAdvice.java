@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.mercadona.pruebat.base.application.exceptions.ExampleNotFoundException;
+import com.mercadona.pruebat.base.application.exception.ExampleNotFoundException;
 import com.mercadona.framework.cna.commons.rest.api.model.ErrorResource;
 import com.mercadona.framework.cna.commons.rest.api.model.ErrorResourceResponse;
 

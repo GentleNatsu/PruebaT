@@ -2,7 +2,7 @@ package com.mercadona.pruebat.base.application.ports.driving;
 import java.util.Optional;
 import com.mercadona.pruebat.base.domain.Example;
 import com.mercadona.framework.cna.commons.domain.MercadonaPage;
-import com.mercadona.pruebat.base.application.exceptions.ExampleNotFoundException;
+import com.mercadona.pruebat.base.application.exception.ExampleNotFoundException;
 
 public interface ExampleServicePort {
 
