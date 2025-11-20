@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +38,10 @@ public class ProductUseCase implements ProductPort {
 
   @Override
   @Transactional
-  @CacheEvict(value = "get-product-id", key = "#id")
+  @Caching(evict = {
+          @CacheEvict(cacheNames = "get-product-id",   key = "#id"),
+          @CacheEvict(cacheNames = "get-products", allEntries = true)
+  })
   public void update(Long id, Product product) {
     product.setId(id);
     dbPort.save(product);

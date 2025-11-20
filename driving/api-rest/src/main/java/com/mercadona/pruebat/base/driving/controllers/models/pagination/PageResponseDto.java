@@ -1,5 +1,6 @@
 package com.mercadona.pruebat.base.driving.controllers.models.pagination;
 
+import com.mercadona.framework.cna.commons.rest.api.model.Pagination;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,12 +16,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class PageResponseDto<T> {
 
-    private PaginationDto pagination;
+    private Pagination pagination;
     private List<T> data;
 
-    public <D> PageResponseDto<D> map(Function<? super T, ? extends D> mapFunction){
-        List<D> mappedList = data.stream().map(mapFunction).collect(Collectors.toList());
-        return new PageResponseDto<>(pagination, mappedList);
-    }
 }
  

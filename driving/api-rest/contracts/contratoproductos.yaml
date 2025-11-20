@@ -1,0 +1,489 @@
+openapi: 3.0.1
+info:
+  title: PruebaTe
+  description: Aplicación para aumentar mi sueldo anual
+  version: v1.0.0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+tags:
+- name: ProvetaApi
+  description: ProvetaApi
+- name: examples
+  description: Example Controller
+paths:
+  /examples/{id}:
+    get:
+      tags:
+      - examples
+      summary: Method to retrieve one example
+      description: This method retrieves a example defined by a specific id
+      operationId: getExample
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExampleResourceResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+    put:
+      tags:
+      - examples
+      summary: Method to update a example
+      description: This method updates a example defined by its id
+      operationId: updateExample
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExampleRequest"
+        required: true
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExampleResourceResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+    delete:
+      tags:
+      - examples
+      summary: Method to delete a example
+      description: This method delete a example by its id
+      operationId: deleteExample
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "202":
+          description: No content
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+  /examples:
+    get:
+      tags:
+      - examples
+      summary: Method to retrieve a collection of examples
+      description: This method retrieves a collection of examples
+      operationId: getExampleCollection
+      parameters:
+      - name: firstPage
+        in: query
+        description: "Requested page (first page is page 1). If not specified 1 is\
+          \ used. [Cannot be negative or zero]"
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: "Number of retrieved elements per page. if not specified 10 is\
+          \ used. [Cannot be less than 1]"
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: sort
+        in: query
+        description: "Sort of the query. [sort=+id] will order asc by id, or [sort=+id]\
+          \ desc by id). Default unsorted."
+        required: false
+        schema:
+          type: string
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExampleResourceCollectionResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+    post:
+      tags:
+      - examples
+      summary: Method to add one example to the data storage
+      description: This method creates a new example with the given body information
+      operationId: createExample
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExampleRequest"
+        required: true
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExampleResourceResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+  /error:
+    get:
+      tags:
+      - custom-error-controller
+      operationId: handleError
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+  /api/v1/proveta:
+    get:
+      tags:
+      - ProvetaApi
+      operationId: proveta
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+components:
+  schemas:
+    ErrorResource:
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
+    ErrorResourceResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/ErrorResource"
+    ExampleResource:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        creationTime:
+          type: string
+          format: date-time
+        identificationType:
+          type: string
+          enum:
+          - DNI
+          - NIE
+        identification:
+          type: string
+        numberOfDaysInWeek:
+          type: integer
+          format: int32
+    ExampleResourceResponse:
+      type: object
+      properties:
+        data:
+          $ref: "#/components/schemas/ExampleResource"
+    ExampleRequest:
+      required:
+      - creationTime
+      - description
+      - identification
+      - identificationType
+      - name
+      - numberOfDaysInWeek
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          maxLength: 30
+          minLength: 5
+          type: string
+        creationTime:
+          type: string
+          format: date-time
+        identificationType:
+          type: string
+          enum:
+          - DNI
+          - NIE
+        identification:
+          pattern: "(?:(?=^[0-9])[0-9]{8}[A-Z]{1}$|(?!^[0-9])[A-Z]{1}[0-9]{7}[A-Z]{1}$)"
+          type: string
+        numberOfDaysInWeek:
+          maximum: 7
+          minimum: 1
+          type: integer
+          format: int32
+      description: exampleRequest
+    ExampleResourceCollection:
+      type: object
+      properties:
+        examples:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExampleResource"
+    ExampleResourceCollectionResponse:
+      type: object
+      properties:
+        data:
+          $ref: "#/components/schemas/ExampleResourceCollection"
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+    Pagination:
+      type: object
+      properties:
+        requestedPage:
+          type: integer
+          format: int32
+        requestedSize:
+          type: integer
+          format: int32
+        retrievedResults:
+          type: integer
+          format: int32
+        totalResults:
+          type: integer
+          format: int64
+        nextPage:
+          type: string
+        previousPage:
+          type: string
+  securitySchemes:
+    adfs:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: ""
+          scopes: {}

@@ -1,5 +1,6 @@
 package com.mercadona.pruebat.base.driven.repositories.adapters;
 
+import com.mercadona.framework.cna.commons.domain.MercadonaCursor;
 import com.mercadona.framework.cna.commons.domain.MercadonaPage;
 import com.mercadona.framework.cna.lib.repository.builders.MercadonaPageBuilder;
 import com.mercadona.pruebat.base.application.ports.driven.ProductDbPort;
