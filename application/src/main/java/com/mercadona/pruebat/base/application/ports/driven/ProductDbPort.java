@@ -4,6 +4,7 @@ import com.mercadona.framework.cna.commons.domain.MercadonaPage;
 import com.mercadona.pruebat.base.domain.products.Product;
 import com.mercadona.pruebat.base.domain.products.ProductQuery;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ProductDbPort {
@@ -12,4 +13,8 @@ public interface ProductDbPort {
   Optional<Product> get(Long id);
 
   void save(Product product);
+
+  void delete(Long id);
+
+  void deleteList(List<Long> ids);
 }

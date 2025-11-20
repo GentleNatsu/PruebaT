@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Tag(name="Product Api", description = "Product api")
 @RequestMapping("/api/v1/products")
@@ -22,6 +24,18 @@ public interface ProductApi {
     ResponseEntity<ProductDto> getById(@PathVariable Long id);
 
     @Operation(summary = "Update a product")
-    @PutMapping("/{id}")
+    @PutMapping("/{id}")//Si es id compuesto anidamos ruta como en pantallas
     ResponseEntity<Void> updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto);
+
+    @Operation(summary = "Patch a product")
+    @PatchMapping("/{id}")//Si es id compuesto anidamos ruta como en pantallas
+    ResponseEntity<Void> patchProduct(@PathVariable Long id, @RequestBody ProductDto productDto);
+
+    @Operation(summary = "Delete a product")
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> deleteProduct(@PathVariable Long id);
+
+    @Operation(summary = "Delete a product")
+    @PostMapping("/delete")
+    ResponseEntity<Void> deleteListOfProducts(@RequestBody List<Long> ids);
 }

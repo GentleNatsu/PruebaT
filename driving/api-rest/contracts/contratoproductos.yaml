@@ -7,6 +7,8 @@ servers:
 - url: http://localhost:8080
   description: Generated server url
 tags:
+- name: Product Api
+  description: Product api
 - name: ProvetaApi
   description: ProvetaApi
 - name: examples
@@ -186,6 +188,104 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResourceResponse"
+  /api/v1/products/{id}:
+    get:
+      tags:
+      - Product Api
+      summary: Get one product by id
+      operationId: getById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProductDto"
+    put:
+      tags:
+      - Product Api
+      summary: Update a product
+      operationId: updateProduct
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductDto"
+        required: true
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+    patch:
+      tags:
+      - Product Api
+      summary: Update a product
+      operationId: patchProduct
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductDto"
+        required: true
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
   /examples:
     get:
       tags:
@@ -365,6 +465,37 @@ paths:
             '*/*':
               schema:
                 type: string
+  /api/v1/products:
+    get:
+      tags:
+      - Product Api
+      summary: Get all products
+      operationId: getAll
+      parameters:
+      - name: queryDto
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/ProductQueryDto"
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageResponseDtoProductDto"
 components:
   schemas:
     ErrorResource:
@@ -447,6 +578,71 @@ components:
           type: integer
           format: int32
       description: exampleRequest
+    OrderDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        customerName:
+          type: string
+        customerEmail:
+          type: string
+        orderDate:
+          type: string
+        status:
+          type: string
+        total:
+          type: number
+          format: float
+    OrderLineDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        orderId:
+          type: integer
+          format: int64
+        productId:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int32
+        unitPrice:
+          type: number
+          format: float
+        order:
+          $ref: "#/components/schemas/OrderDto"
+    ProductDto:
+      required:
+      - id
+      - price
+      - stock
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: float
+        stock:
+          type: integer
+          format: int32
+        createdAt:
+          type: string
+          format: date-time
+        orderLines:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderLineDto"
     ExampleResourceCollection:
       type: object
       properties:
@@ -480,6 +676,33 @@ components:
           type: string
         previousPage:
           type: string
+    ProductQueryDto:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        order:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: float
+    PageResponseDtoProductDto:
+      type: object
+      properties:
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductDto"
   securitySchemes:
     adfs:
       type: oauth2
