@@ -10,9 +10,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MercaceptorsConfiguration implements WebMvcConfigurer {
 
     private final LocaleMercaceptor localeMercaceptor;
+    private final JwtInterceptor jwtInterceptor;
+
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeMercaceptor);
+        registry.addInterceptor(jwtInterceptor).addPathPatterns("/api/v1/**")
+                .excludePathPatterns("/auth/**");
     }
 }

@@ -4,31 +4,33 @@ info:
   description: Aplicación para aumentar mi sueldo anual
   version: v1.0.0
 servers:
-- url: http://localhost:8080
-  description: Generated server url
+  - url: http://localhost:8080
+    description: Generated server url
 tags:
-- name: Product Api
-  description: Product api
-- name: ProvetaApi
-  description: ProvetaApi
-- name: examples
-  description: Example Controller
+  - name: Product Api
+    description: Product api
+  - name: Authentication Api
+    description: Authentication api
+  - name: ProvetaApi
+    description: ProvetaApi
+  - name: examples
+    description: Example Controller
 paths:
   /examples/{id}:
     get:
       tags:
-      - examples
+        - examples
       summary: Method to retrieve one example
       description: This method retrieves a example defined by a specific id
       operationId: getExample
       parameters:
-      - name: id
-        in: path
-        description: id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "422":
           description: Unprocessable Entity
@@ -74,18 +76,18 @@ paths:
                 $ref: "#/components/schemas/ErrorResourceResponse"
     put:
       tags:
-      - examples
+        - examples
       summary: Method to update a example
       description: This method updates a example defined by its id
       operationId: updateExample
       parameters:
-      - name: id
-        in: path
-        description: id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -137,18 +139,18 @@ paths:
                 $ref: "#/components/schemas/ErrorResourceResponse"
     delete:
       tags:
-      - examples
+        - examples
       summary: Method to delete a example
       description: This method delete a example by its id
       operationId: deleteExample
       parameters:
-      - name: id
-        in: path
-        description: id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "422":
           description: Unprocessable Entity
@@ -191,16 +193,16 @@ paths:
   /api/v1/products/{id}:
     get:
       tags:
-      - Product Api
+        - Product Api
       summary: Get one product by id
       operationId: getById
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         "422":
           description: Unprocessable Entity
@@ -222,16 +224,16 @@ paths:
                 $ref: "#/components/schemas/ProductDto"
     put:
       tags:
-      - Product Api
+        - Product Api
       summary: Update a product
       operationId: updateProduct
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -253,18 +255,45 @@ paths:
                 $ref: "#/components/schemas/ErrorResourceResponse"
         "200":
           description: OK
+    delete:
+      tags:
+        - Product Api
+      summary: Delete a product
+      operationId: deleteProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
     patch:
       tags:
-      - Product Api
-      summary: Update a product
+        - Product Api
+      summary: Patch a product
       operationId: patchProduct
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -289,36 +318,36 @@ paths:
   /examples:
     get:
       tags:
-      - examples
+        - examples
       summary: Method to retrieve a collection of examples
       description: This method retrieves a collection of examples
       operationId: getExampleCollection
       parameters:
-      - name: firstPage
-        in: query
-        description: "Requested page (first page is page 1). If not specified 1 is\
+        - name: firstPage
+          in: query
+          description: "Requested page (first page is page 1). If not specified 1 is\
           \ used. [Cannot be negative or zero]"
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 1
-      - name: pageSize
-        in: query
-        description: "Number of retrieved elements per page. if not specified 10 is\
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - name: pageSize
+          in: query
+          description: "Number of retrieved elements per page. if not specified 10 is\
           \ used. [Cannot be less than 1]"
-        required: false
-        schema:
-          type: integer
-          format: int32
-          default: 10
-      - name: sort
-        in: query
-        description: "Sort of the query. [sort=+id] will order asc by id, or [sort=+id]\
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - name: sort
+          in: query
+          description: "Sort of the query. [sort=+id] will order asc by id, or [sort=+id]\
           \ desc by id). Default unsorted."
-        required: false
-        schema:
-          type: string
+          required: false
+          schema:
+            type: string
       responses:
         "422":
           description: Unprocessable Entity
@@ -364,7 +393,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResourceResponse"
     post:
       tags:
-      - examples
+        - examples
       summary: Method to add one example to the data storage
       description: This method creates a new example with the given body information
       operationId: createExample
@@ -417,10 +446,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResourceResponse"
+  /api/v1/products/delete:
+    post:
+      tags:
+        - Product Api
+      summary: Delete a product
+      operationId: deleteListOfProducts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: integer
+                format: int64
+        required: true
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
   /error:
     get:
       tags:
-      - custom-error-controller
+        - custom-error-controller
       operationId: handleError
       responses:
         "422":
@@ -441,10 +500,40 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/ErrorResourceResponse"
+  /auth/login:
+    get:
+      tags:
+        - Authentication Api
+      operationId: login
+      parameters:
+        - name: requestDto
+          in: query
+          required: true
+          schema:
+            $ref: "#/components/schemas/LoginRequestDto"
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/LoginResponseDto"
   /api/v1/proveta:
     get:
       tags:
-      - ProvetaApi
+        - ProvetaApi
       operationId: proveta
       responses:
         "422":
@@ -468,15 +557,15 @@ paths:
   /api/v1/products:
     get:
       tags:
-      - Product Api
+        - Product Api
       summary: Get all products
       operationId: getAll
       parameters:
-      - name: queryDto
-        in: query
-        required: true
-        schema:
-          $ref: "#/components/schemas/ProductQueryDto"
+        - name: queryDto
+          in: query
+          required: true
+          schema:
+            $ref: "#/components/schemas/ProductQueryDto"
       responses:
         "422":
           description: Unprocessable Entity
@@ -530,8 +619,8 @@ components:
         identificationType:
           type: string
           enum:
-          - DNI
-          - NIE
+            - DNI
+            - NIE
         identification:
           type: string
         numberOfDaysInWeek:
@@ -544,12 +633,12 @@ components:
           $ref: "#/components/schemas/ExampleResource"
     ExampleRequest:
       required:
-      - creationTime
-      - description
-      - identification
-      - identificationType
-      - name
-      - numberOfDaysInWeek
+        - creationTime
+        - description
+        - identification
+        - identificationType
+        - name
+        - numberOfDaysInWeek
       type: object
       properties:
         id:
@@ -567,8 +656,8 @@ components:
         identificationType:
           type: string
           enum:
-          - DNI
-          - NIE
+            - DNI
+            - NIE
         identification:
           pattern: "(?:(?=^[0-9])[0-9]{8}[A-Z]{1}$|(?!^[0-9])[A-Z]{1}[0-9]{7}[A-Z]{1}$)"
           type: string
@@ -617,9 +706,9 @@ components:
           $ref: "#/components/schemas/OrderDto"
     ProductDto:
       required:
-      - id
-      - price
-      - stock
+        - id
+        - price
+        - stock
       type: object
       properties:
         id:
@@ -675,6 +764,18 @@ components:
         nextPage:
           type: string
         previousPage:
+          type: string
+    LoginRequestDto:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    LoginResponseDto:
+      type: object
+      properties:
+        token:
           type: string
     ProductQueryDto:
       type: object
