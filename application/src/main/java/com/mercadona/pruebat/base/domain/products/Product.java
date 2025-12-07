@@ -16,9 +16,7 @@ import java.util.Set;
 public class Product {
   private Long id;
   private String name;
-  private String description;
   private Float price;
-  private Integer stock;
   private OffsetDateTime createdAt;
 
   private Set<OrderLine> orderLines;

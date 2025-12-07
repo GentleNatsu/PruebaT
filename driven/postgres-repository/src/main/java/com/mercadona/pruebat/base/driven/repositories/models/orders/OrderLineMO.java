@@ -23,8 +23,6 @@ public class OrderLineMO {
   private Long productId;
   @Column(name = "quantity")
   private Integer quantity;
-  @Column(name = "unit_price")
-  private Float unitPrice;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "product_id", referencedColumnName = "product_id", insertable = false, updatable = false)

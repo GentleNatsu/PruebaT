@@ -21,13 +21,11 @@ public class ProductDto {
   @NotNull
   private Long id;
   private String name;
-  private String description;
   @NotNull
   private Float price;
   @NotNull
-  @PositiveOrZero
-  private Integer stock;
   private OffsetDateTime createdAt;
+
 
   private Set<OrderLineDto> orderLines;
 }

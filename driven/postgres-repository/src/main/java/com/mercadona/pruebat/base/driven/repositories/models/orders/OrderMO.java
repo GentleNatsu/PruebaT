@@ -19,16 +19,14 @@ public class OrderMO {
   @Id
   @Column(name = "order_id")
   private Long id;
-  @Column(name = "customer_name")
-  private String customerName;
-  @Column(name = "customer_email")
-  private String customerEmail;
-  @Column(name = "order_date")
-  private String orderDate;
-  @Column(name = "status")
-  private String status;
-  @Column(name = "total")
-  private Float total;
+  @Column(name = "customer_id")
+  private String customerId;
+  @Column(name = "store_id")
+  private String storeId;
+  @Column(name = "address")
+  private String address;
+  @Column(name = "priority")
+  private Integer priority;
 
   @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
   private Set<OrderLineMO> orderLines;

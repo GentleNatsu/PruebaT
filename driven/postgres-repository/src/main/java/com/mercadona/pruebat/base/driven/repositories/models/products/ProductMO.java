@@ -1,6 +1,7 @@
 package com.mercadona.pruebat.base.driven.repositories.models.products;
 
 import com.mercadona.pruebat.base.driven.repositories.models.orders.OrderLineMO;
+import com.mercadona.pruebat.base.driven.repositories.models.stores.StoreProductsMO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,15 +23,16 @@ public class ProductMO {
   private Long id;
   @Column(name = "name")
   private String name;
-  @Column(name = "description")
-  private String description;
   @Column(name = "price")
   private Float price;
-  @Column(name = "stock")
-  private Integer stock;
+
   @Column(name = "created_at")
   private OffsetDateTime createdAt;
 
   @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
   private Set<OrderLineMO> orderLines;
+
+  @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+  private Set<StoreProductsMO> storeProductsMOS;
+
 }

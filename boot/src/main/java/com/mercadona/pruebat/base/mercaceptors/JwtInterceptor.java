@@ -20,31 +20,31 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        String authHeader = request.getHeader("Authorization");
-
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            throw new PruebaTeException(ErrorCode.TOKEN_ERROR);
-        }
-        String token = authHeader.substring(7);
-
-        try {
-            Claims claims = JwtUtil.validateToken(token);
-            String role = claims.get("role", String.class);
-
-            if (role != null) {
-                List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_" + role));
-
-                UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(claims.getSubject(),
-                        null, authorities);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            }
-            request.setAttribute("username", claims.getSubject());
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            throw new PruebaTeException(ErrorCode.TOKEN_ERROR);
-        }
+//        String authHeader = request.getHeader("Authorization");
+//
+//        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+//            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//            throw new PruebaTeException(ErrorCode.TOKEN_ERROR);
+//        }
+//        String token = authHeader.substring(7);
+//
+//        try {
+//            Claims claims = JwtUtil.validateToken(token);
+//            String role = claims.get("role", String.class);
+//
+//            if (role != null) {
+//                List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_" + role));
+//
+//                UsernamePasswordAuthenticationToken authentication =
+//                        new UsernamePasswordAuthenticationToken(claims.getSubject(),
+//                        null, authorities);
+//                SecurityContextHolder.getContext().setAuthentication(authentication);
+//            }
+//            request.setAttribute("username", claims.getSubject());
+//        } catch (Exception e) {
+//            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//            throw new PruebaTeException(ErrorCode.TOKEN_ERROR);
+//        }
 
         return true;
     }
