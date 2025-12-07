@@ -27,7 +27,7 @@ public class ProductUseCase implements ProductPort {
 
   @Override
   @Transactional(readOnly = true)
-  @Cacheable(value = "get-products")
+  @Cacheable(value = "get-products", key = "#query.toCacheKey()")
   public MercadonaPage<Product> getAll(ProductQuery query) {
     return dbPort.getAll(query);
   }

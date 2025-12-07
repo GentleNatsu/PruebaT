@@ -8,6 +8,8 @@ import com.mercadona.pruebat.base.driving.controllers.models.product.ProductDto;
 import com.mercadona.pruebat.base.driving.controllers.models.product.ProductQueryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +24,7 @@ public class ProductController implements ProductApi {
   private final ProductDtoMapper mapper;
 
   @Override
+  @PreAuthorize("hasAuthority('ROLE_ADMIN')")
   public ResponseEntity<PageResponseDto<ProductDto>> getAll(ProductQueryDto queryDto) {
     var query = mapper.toDomain(queryDto);
     var page = port.getAll(query);

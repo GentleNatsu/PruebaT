@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum ErrorCode {
 
-    PROVETA_ERROR("T-01");
+    PROVETA_ERROR("T-01"),
+    TOKEN_ERROR("T-02");
 
     private final String errorCode;
 

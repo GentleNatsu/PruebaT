@@ -47,7 +47,7 @@ public class ProductDbAdapter implements ProductDbPort {
       .map(productById::get)
       .filter(Objects::nonNull)
       .map(mapper::toDomain)
-      .collect(Collectors.toList());
+      .toList();
   }
 
 
