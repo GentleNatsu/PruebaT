@@ -24,8 +24,8 @@ public class StoreProductDbAdapter implements StoreProductDbPort {
     private final StoreProductsDbMapper dbMapper;
 
     @Override
-    public Set<StoreProduct> getProductsByStore(Long id) {
-        return repository.findAllByStoreId(id).stream().map(dbMapper::toDomain).collect(Collectors.toSet());
+    public List<StoreProduct> getProductsByStore(Long id) {
+        return repository.findAllByStoreId(id).stream().map(dbMapper::toDomain).toList();
     }
 
     @Override

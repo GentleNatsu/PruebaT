@@ -3,6 +3,7 @@ package com.mercadona.pruebat.base.domain.stores;
 import com.mercadona.pruebat.base.domain.vehicles.Vehicle;
 import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -15,8 +16,8 @@ public class Store {
     private String description;
     private String address;
 
-    private Set<StoreProduct> products;
-    private Set<Vehicle> vehicles;
+    private List<StoreProduct> products;
+    private List<Vehicle> vehicles;
 
 
 }

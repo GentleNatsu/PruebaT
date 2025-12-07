@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface StoreProductDbPort {
 
-    Set<StoreProduct> getProductsByStore(Long id);
+    List<StoreProduct> getProductsByStore(Long id);
 
     Map<Long, List<StoreProduct>> getProductsByStores(Set<Long> ids);
 

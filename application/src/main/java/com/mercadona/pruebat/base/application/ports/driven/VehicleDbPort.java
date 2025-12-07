@@ -8,7 +8,7 @@ import java.util.Set;
 
 public interface VehicleDbPort {
 
-    Set<Vehicle> getVehiclesByStore(Long id);
+    List<Vehicle> getVehiclesByStore(Long id);
 
     Map<Long, List<Vehicle>> getVehiclesByStores(Set<Long> ids);
 }

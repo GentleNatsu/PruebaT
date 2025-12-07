@@ -21,8 +21,8 @@ public class VehicleDbAdapter implements VehicleDbPort {
     private final VehicleDbMapper dbMapper;
 
     @Override
-    public Set<Vehicle> getVehiclesByStore(Long id) {
-        return repository.findAllByStoreId(id).stream().map(dbMapper::toDomain).collect(Collectors.toSet());
+    public List<Vehicle> getVehiclesByStore(Long id) {
+        return repository.findAllByStoreId(id).stream().map(dbMapper::toDomain).toList();
     }
 
     @Override
