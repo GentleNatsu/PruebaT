@@ -5,7 +5,10 @@ import com.mercadona.framework.cna.commons.rest.api.model.Pagination;
 import com.mercadona.framework.cna.lib.web.builders.MercadonaPageResponseBuilder;
 import com.mercadona.pruebat.base.domain.products.Product;
 import com.mercadona.pruebat.base.domain.stores.Store;
+import com.mercadona.pruebat.base.domain.stores.StoreProduct;
 import com.mercadona.pruebat.base.domain.stores.StoreQuery;
+import com.mercadona.pruebat.base.domain.vehicles.Vehicle;
+import com.mercadona.pruebat.base.driving.controllers.models.VehicleDto;
 import com.mercadona.pruebat.base.driving.controllers.models.pagination.PageResponseDto;
 import com.mercadona.pruebat.base.driving.controllers.models.product.ProductDto;
 import com.mercadona.pruebat.base.driving.controllers.models.store.StoreDto;
@@ -23,9 +26,18 @@ public abstract class StoreDtoMapper {
 
     public abstract StoreDto toDto(Store store);
 
+    @Mapping(source = "vehicles", target = "vehicleDtos")
+    @Mapping(source = "products", target = "productDtos")
     public abstract StoreDtoWithProducts toDtoWithProducts(Store store);
 
+    public abstract VehicleDto toDto(Vehicle store);
 
+
+    public abstract ProductDto toDto(StoreProduct store);
+
+
+
+    @Mapping(target = "vehicles", source = "vehicleDtos")
     public abstract Store toDomain(StoreDto storeDto);
 
     public abstract StoreQuery toDomain(StoreQueryDto queryDto);

@@ -60,16 +60,21 @@ public class StoresAdapter implements StoresPort {
     public void update(Long id, Store store) {
         store.setStoreId(id);
         storeDbPort.save(store);
+        store.getVehicles().forEach(v -> v.setStoreId(id));
+        vehicleDbPort.saveAll(store.getVehicles());
     }
 
     @Override
     public void create(Store store) {
-        storeDbPort.save(store);
+        var storeId = storeDbPort.save(store);
+        store.getVehicles().forEach(v -> v.setStoreId(storeId));
+        vehicleDbPort.saveAll(store.getVehicles());
     }
 
     @Override
     public void delete(Long id) {
+        vehicleDbPort.deleteByStoreId(id);
+        storeProductDbPort.deleteByStoreId(id);
         storeDbPort.delete(id);
-
     }
 }

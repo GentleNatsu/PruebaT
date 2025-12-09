@@ -13,4 +13,5 @@ public interface StoreProductDbPort {
 
     Map<Long, List<StoreProduct>> getProductsByStores(Set<Long> ids);
 
+    void deleteByStoreId(Long id);
 }

@@ -5,12 +5,7 @@
 -- DROP TABLE public.orders;
 
 CREATE TABLE public.orders (
-	order_id bigserial NOT NULL,
-	customer_name varchar(255) NOT NULL,
-	customer_email varchar(255) NULL,
-	order_date varchar(255) NULL,
-	status varchar(255) NULL,
-	total float4 NULL,
+	order_id int8 NOT NULL,
 	address varchar(255) NULL,
 	customer_id varchar(255) NULL,
 	priority int4 NULL,
@@ -26,11 +21,9 @@ CREATE TABLE public.orders (
 -- DROP TABLE public.products;
 
 CREATE TABLE public.products (
-	product_id bigserial NOT NULL,
+	product_id int8 NOT NULL,
 	"name" varchar(255) NOT NULL,
-	description varchar(255) NULL,
 	price float4 NOT NULL,
-	stock int4 NULL,
 	created_at timestamptz NULL,
 	CONSTRAINT pk_products PRIMARY KEY (product_id)
 );
@@ -48,6 +41,9 @@ CREATE TABLE public.stores (
 	description varchar(255) NULL,
 	CONSTRAINT stores_pkey PRIMARY KEY (store_id)
 );
+
+CREATE SEQUENCE stores_seq START 1;
+
 
 
 -- public.usuarios definition
@@ -71,9 +67,9 @@ CREATE TABLE public.usuarios (
 -- DROP TABLE public.order_lines;
 
 CREATE TABLE public.order_lines (
-	line_id bigserial NOT NULL,
+	line_id int8 NOT NULL,
 	order_id int8 NOT NULL,
-	product_id bigserial NOT NULL,
+	product_id int8 NOT NULL,
 	quantity int4 NOT NULL,
 	unit_price float4 NOT NULL,
 	CONSTRAINT pk_order_lines PRIMARY KEY (line_id),
@@ -89,7 +85,7 @@ CREATE TABLE public.order_lines (
 -- DROP TABLE public.store_products;
 
 CREATE TABLE public.store_products (
-	product_id bigserial NOT NULL,
+	product_id int8 NOT NULL,
 	store_id bigserial NOT NULL,
 	quantity int4 NULL,
 	CONSTRAINT store_products_pkey PRIMARY KEY (product_id, store_id),
@@ -105,9 +101,9 @@ CREATE TABLE public.store_products (
 -- DROP TABLE public.vehicles;
 
 CREATE TABLE public.vehicles (
-	vehicle_id bigserial NOT NULL,
+	vehicle_id int8 NOT NULL,
 	capacity int4 NULL,
-	store_id bigserial NOT NULL,
+	store_id bigserial not NULL,
 	"type" varchar(255) NULL,
 	CONSTRAINT vehicles_pkey PRIMARY KEY (vehicle_id),
 	CONSTRAINT fk_vehicles_store FOREIGN KEY (store_id) REFERENCES public.stores(store_id)

@@ -1,8 +1,6 @@
 package com.mercadona.pruebat.base.driving.controllers.api;
 
 import com.mercadona.pruebat.base.driving.controllers.models.pagination.PageResponseDto;
-import com.mercadona.pruebat.base.driving.controllers.models.product.ProductDto;
-import com.mercadona.pruebat.base.driving.controllers.models.product.ProductQueryDto;
 import com.mercadona.pruebat.base.driving.controllers.models.store.StoreDto;
 import com.mercadona.pruebat.base.driving.controllers.models.store.StoreDtoWithProducts;
 import com.mercadona.pruebat.base.driving.controllers.models.store.StoreQueryDto;
@@ -10,8 +8,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @Tag(name="Stores Api", description = "Stores api")
@@ -36,6 +32,6 @@ public interface StoresApi {
 
     @Operation(summary = "Delete a store")
     @DeleteMapping("/{id}")
-    ResponseEntity<Void> deleteProduct(@PathVariable Long id);
+    ResponseEntity<Void> deleteStore(@PathVariable Long id);
 
 }

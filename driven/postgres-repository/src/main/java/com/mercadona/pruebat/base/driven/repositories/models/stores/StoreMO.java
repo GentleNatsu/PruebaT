@@ -19,8 +19,12 @@ import java.util.Set;
 public class StoreMO {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "store_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_gen")
+    @SequenceGenerator(
+            name = "user_seq_gen",
+            sequenceName = "stores_store_id_seq", // Nombre que me crea solo el puto bigserial, no seas tonto carlitos
+            allocationSize = 1
+    )    @Column(name = "store_id")
     private Long storeId;
     @Column(name = "description")
     private String description;

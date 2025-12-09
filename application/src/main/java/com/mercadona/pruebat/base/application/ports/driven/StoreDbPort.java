@@ -12,7 +12,7 @@ public interface StoreDbPort {
 
     Optional<Store> get(Long id);
 
-    void save(Store store);
+    Long save(Store store);
 
     void delete(Long id);
 }

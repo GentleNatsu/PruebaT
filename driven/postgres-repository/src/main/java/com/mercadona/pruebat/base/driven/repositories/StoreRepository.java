@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StoreRepository extends JpaRepository<StoreMO, Long> {
 
-    Page<StoreMO> findAllByDescription(String description, Pageable pageRequest);
+    Page<StoreMO> findByDescriptionContaining(String description, Pageable pageRequest);
 
 }

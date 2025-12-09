@@ -21,4 +21,7 @@ public interface StoreProductsRepository extends JpaRepository<StoreProductsMO, 
             SELECT s from StoreProductsMO s where s.storeId in :ids
             """)
     Set<StoreProductsMO> findAllByStoreIds(Set<Long> ids);
+
+
+    void deleteByStoreId(Long storeId);
 }

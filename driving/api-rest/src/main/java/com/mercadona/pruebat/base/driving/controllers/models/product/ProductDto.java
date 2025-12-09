@@ -19,8 +19,9 @@ import java.util.Set;
 public class ProductDto {
 
   @NotNull
-  private Long id;
-  private String name;
+  private Long productId;
+  private String productDescription;
+  private Integer quantity;
   @NotNull
   private Float price;
   @NotNull

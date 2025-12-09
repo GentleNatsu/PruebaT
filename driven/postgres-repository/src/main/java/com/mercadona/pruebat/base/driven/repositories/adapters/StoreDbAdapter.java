@@ -7,7 +7,10 @@ import com.mercadona.pruebat.base.domain.stores.Store;
 import com.mercadona.pruebat.base.domain.stores.StoreQuery;
 import com.mercadona.pruebat.base.driven.repositories.StoreRepository;
 import com.mercadona.pruebat.base.driven.repositories.mappers.StoreDbMapper;
+import com.mercadona.pruebat.base.driven.repositories.models.stores.StoreMO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -23,8 +26,18 @@ public class StoreDbAdapter implements StoreDbPort {
     @Override
     public MercadonaPage<Store> getAll(StoreQuery query) {
         var pageRequest =  mercadonaPageBuilder.builder().page(query.getPage()).pageSize(query.getPageSize()).sort(query.getOrder()).build();
-        var records= storeRepository.findAllByDescription(query.getName(), pageRequest).map(storeDbMapper::toDomain);
+        Page<Store> records = getRecords(query, pageRequest);
         return MercadonaPage.of(records);
+    }
+
+    private Page<Store> getRecords(StoreQuery query, Pageable pageRequest) {
+        Page<StoreMO> records;
+        if (query.getName() != null) {
+            records = storeRepository.findByDescriptionContaining(query.getName(), pageRequest);
+        } else {
+            records = storeRepository.findAll(pageRequest);
+        }
+        return records.map(storeDbMapper::toDomain);
     }
 
     @Override
@@ -33,9 +46,9 @@ public class StoreDbAdapter implements StoreDbPort {
     }
 
     @Override
-    public void save(Store store) {
+    public Long save(Store store) {
         var storeMO = storeDbMapper.toDb(store);
-        storeRepository.save(storeMO);
+       return storeRepository.save(storeMO).getStoreId();
     }
 
     @Override

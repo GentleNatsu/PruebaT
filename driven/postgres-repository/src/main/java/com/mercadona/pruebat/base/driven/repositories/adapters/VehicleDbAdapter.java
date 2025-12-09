@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -29,5 +28,16 @@ public class VehicleDbAdapter implements VehicleDbPort {
     public Map<Long, List<Vehicle>> getVehiclesByStores(Set<Long> ids) {
         return repository.findAllByStoreIds(ids).stream().map(dbMapper::toDomain)
                 .collect(Collectors.groupingBy(Vehicle::getStoreId));
+    }
+
+    @Override
+    public void deleteByStoreId(Long id) {
+        repository.deleteByStoreId(id);
+    }
+
+    @Override
+    public void saveAll(List<Vehicle> vehicles) {
+        var vehiclesMO= vehicles.stream().map(dbMapper::toDb).toList();
+        repository.saveAll(vehiclesMO);
     }
 }

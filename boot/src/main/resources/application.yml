@@ -14,7 +14,7 @@ spring:
     show-sql: true
     hibernate:
       format_sql: false
-      ddl-auto: update
+      ddl-auto: none
 
 # Actuator endpoints configuration
 management:

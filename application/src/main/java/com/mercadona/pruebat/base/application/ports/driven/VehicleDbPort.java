@@ -11,4 +11,8 @@ public interface VehicleDbPort {
     List<Vehicle> getVehiclesByStore(Long id);
 
     Map<Long, List<Vehicle>> getVehiclesByStores(Set<Long> ids);
+
+    void deleteByStoreId(Long id);
+
+    void saveAll(List<Vehicle> vehicles);
 }

@@ -1,48 +1,30 @@
-Framework Backend Arquetipo Web
+Bienvenido a la Prueba T de Carlos García Cremades
 ===================================
 
 
-```bash
-mvn archetype:generate -DarchetypeGroupId=com.mercadona.framework.cna.archetype -DarchetypeArtifactId=fwkcna-archetype-web -DarchetypeVersion=5.0.0
-```
 
 
 
-Podemos ejecutar y ver en funcionamiento el ejemplo incorporado en la generación del proyecto.
-Prerequsitos:
+Para poder arrancar la mejor aplicación del universo, tienes que seguir unos sencillos pasos:
 
-- Docker
-- Postman
-- Cliente de postgres (para poder ejecutar SQLs de creación de tablas)
-  Nos posicionamos en el directorio `raiz` del proyecto generado, y realizamos los siguientes pasos:
-
-1. Levantamos una bbdd en local utilizando `docker`, en la carpeta `docker`
+1. Primero necesitamos compilar el programa ejecutando en la carpeta raíz del proyecto:
 
    ```bash
-    docker-compose up
+    mvn clean package
     ```
-2. Creamos las tablas de base de datos del ejemplo utilizando el script situado en la carpeta
-   `driven/repository-jpa/sql/migration/versions.1.0.0-create-schema-examples/V1.0.0__create-schema-examples.sql`
-
-3. Hacemos la instalación en local del proyecto
-
+2. Construimos la imagen de docker:
    ```bash
-    mvn clean install
-    ```
+   docker-compose build
+   ```
+   La imagen contiene la base de datos y la aplicación. Los datos se precargarán utilizando flyway como control de versiones.
 
-4. Ejecutamos la aplicación desde la raíz del proyecto con:
 
+3. Levantamos la imagen del docker:
    ```bash
-    mvn clean spring-boot:run -pl boot -Dspring-boot.run.profiles=local
-    ```
+   docker-compose up
+   ```
 
-   o navegando a la carpeta `boot` del proyecto:
-
-    ```bash
-    mvn clean spring-boot:run -Dspring-boot.run.profiles=local
-    ```
-
-6. Probamos la aplicación desde `postman`, importamos las collections de la carpeta `driving/api-rest/postman`
+4. Importamos la colección de peticiones de postman que tenemos en driving/api-rest/postman
    
 # Microservicio generado a partir de arquetipo
 

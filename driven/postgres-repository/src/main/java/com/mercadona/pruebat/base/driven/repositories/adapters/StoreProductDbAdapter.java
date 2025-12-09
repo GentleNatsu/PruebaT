@@ -33,4 +33,10 @@ public class StoreProductDbAdapter implements StoreProductDbPort {
         return repository.findAllByStoreIds(ids).stream().map(dbMapper::toDomain)
                 .collect(Collectors.groupingBy(StoreProduct::getStoreId));
     }
+
+    @Override
+    public void deleteByStoreId(Long id) {
+        repository.deleteByStoreId(id);
+
+    }
 }

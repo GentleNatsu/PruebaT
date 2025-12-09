@@ -17,4 +17,6 @@ public interface VehicleRepository extends JpaRepository<VehicleMO, Long> {
             SELECT v from VehicleMO v where v.storeId in :ids
             """)
     Set<VehicleMO> findAllByStoreIds(Set<Long> ids);
+
+    void deleteByStoreId(Long storeId);
 }
