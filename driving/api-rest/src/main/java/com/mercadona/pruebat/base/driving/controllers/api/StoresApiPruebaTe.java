@@ -7,8 +7,10 @@ import com.mercadona.pruebat.base.driving.controllers.models.store.StoreDtoUpdat
 import com.mercadona.pruebat.base.driving.controllers.models.store.StoreQueryDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Tag(name="Stores Api", description = "Stores api")
@@ -45,8 +47,4 @@ public interface StoresApiPruebaTe {
 
     @RequestMapping(value = "/{id}/stock.csv")
    ResponseEntity<byte[]> getStockCsv(@PathVariable Long id);
-
-
-
-
 }

@@ -2,6 +2,7 @@ package com.mercadona.pruebat.base.driving.controllers.adapters;
 
 import com.mercadona.pruebat.base.application.exception.ErrorCode;
 import com.mercadona.pruebat.base.application.exception.PruebaTeException;
+import com.mercadona.pruebat.base.application.ports.driving.MovementsPort;
 import com.mercadona.pruebat.base.application.ports.driving.StoresPort;
 import com.mercadona.pruebat.base.driving.controllers.api.StoresApiPruebaTe;
 import com.mercadona.pruebat.base.driving.controllers.mappers.StoreDtoMapper;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.UnsupportedEncodingException;
 
@@ -26,6 +28,7 @@ public class StoreController implements StoresApiPruebaTe {
 
     private final StoresPort port;
     private final StoreDtoMapper mapper;
+    private final MovementsPort movementsPort;
 
 
     @Override
