@@ -470,6 +470,112 @@
 											]
 										},
 										{
+											"name": "Get one store by id Error in portuguese",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/stores/1",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"stores",
+														"1"
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/v1/stores/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"v1",
+																"stores",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"storeId\": \"<long>\",\n  \"description\": \"<string>\",\n  \"address\": \"<string>\",\n  \"rackDtos\": [\n    {\n      \"rackId\": \"<long>\",\n      \"capacity\": \"<integer>\",\n      \"section\": \"<string>\"\n    },\n    {\n      \"rackId\": \"<long>\",\n      \"capacity\": \"<integer>\",\n      \"section\": \"<string>\"\n    }\n  ]\n}"
+												},
+												{
+													"name": "Unprocessable Entity",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/v1/stores/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"v1",
+																"stores",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																}
+															]
+														}
+													},
+													"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+													"code": 422,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"details\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}"
+												}
+											]
+										},
+										{
 											"name": "Update a store",
 											"request": {
 												"method": "PUT",
@@ -998,6 +1104,19 @@
 											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"details\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}"
 										}
 									]
+								}
+							]
+						},
+						{
+							"name": "movements",
+							"item": [
+								{
+									"name": "New Request",
+									"request": {
+										"method": "GET",
+										"header": []
+									},
+									"response": []
 								}
 							]
 						}

@@ -7,6 +7,8 @@ servers:
   - url: http://localhost:8080
     description: Generated server url
 tags:
+  - name: Movements Api
+    description: Movements api
   - name: Stores Api
     description: Stores api
 paths:
@@ -129,6 +131,38 @@ paths:
                 $ref: "#/components/schemas/ErrorResourceResponse"
         "200":
           description: OK
+  /api/v1/movements/store/{id}:
+    post:
+      tags:
+        - Movements Api
+      summary: Process movements file
+      operationId: processMovements
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+        required: true
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
   /error:
     get:
       tags:
@@ -199,6 +233,182 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/StoreDtoExtended"
+  /api/v1/stores/{id}/stock.csv:
+    get:
+      tags:
+        - Stores Api
+      operationId: getStockCsv
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: byte
+    put:
+      tags:
+        - Stores Api
+      operationId: getStockCsv_3
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: byte
+    post:
+      tags:
+        - Stores Api
+      operationId: getStockCsv_2
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: byte
+    delete:
+      tags:
+        - Stores Api
+      operationId: getStockCsv_5
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: byte
+    options:
+      tags:
+        - Stores Api
+      operationId: getStockCsv_6
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: byte
+    head:
+      tags:
+        - Stores Api
+      operationId: getStockCsv_1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: byte
+    patch:
+      tags:
+        - Stores Api
+      operationId: getStockCsv_4
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "422":
+          description: Unprocessable Entity
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: byte
 components:
   schemas:
     ErrorResource:
@@ -318,6 +528,10 @@ components:
         storeId:
           type: integer
           format: int64
+        productDescription:
+          type: string
+        productSection:
+          type: string
         quantity:
           type: integer
           format: int32
@@ -333,6 +547,10 @@ components:
         quantity:
           type: integer
           format: int32
+        productDescription:
+          type: string
+        productSection:
+          type: string
     StoreDtoExtended:
       type: object
       properties:
@@ -356,15 +574,14 @@ components:
     WarehouseDtoWithStock:
       type: object
       properties:
-        productId:
+        warehouseId:
           type: integer
           format: int64
-        storeId:
-          type: integer
-          format: int64
-        quantity:
+        capacity:
           type: integer
           format: int32
+        description:
+          type: string
         stockWarehouseDtos:
           type: array
           items:
