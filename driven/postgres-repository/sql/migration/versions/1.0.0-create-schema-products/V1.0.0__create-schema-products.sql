@@ -4,7 +4,7 @@
 
 -- DROP TABLE public.products;
 
-CREATE TABLE public.products (
+CREATE table public.products (
 	price float4 NULL,
 	product_id int8 NOT NULL,
 	"name" varchar(255) NULL,
@@ -107,6 +107,17 @@ CREATE TABLE public.revinfo (
 	CONSTRAINT revinfo_pkey PRIMARY KEY (rev)
 );
 
+-- public.revinfo_seq definition
+
+-- DROP SEQUENCE public.revinfo_seq;
+
+CREATE SEQUENCE public.revinfo_seq
+	INCREMENT BY 50
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START 1
+	CACHE 1
+	NO CYCLE;
 
 -- public.stores_h definition
 
@@ -123,3 +134,42 @@ CREATE TABLE public.stores_h (
 	CONSTRAINT stores_h_pkey PRIMARY KEY (rev, store_id),
 	CONSTRAINT fkoxvqian1g7as3bu0ktgto890n FOREIGN KEY (rev) REFERENCES public.revinfo(rev)
 );
+
+
+INSERT INTO products(product_id, name, price, "section") VALUES(1,'Arroz de Valencia', 6.5,null);
+INSERT INTO products(product_id, name, price, "section") VALUES(2,'Galletas sin gluten', 3.6,1);
+INSERT INTO products(product_id, name, price, "section") VALUES(3,'Leche de vaca', 1.5,2);
+INSERT INTO products(product_id, name, price, "section") VALUES(4,'Café soluble',4.0,3);
+INSERT INTO products(product_id, name, price, "section") VALUES(5,'Aceite de oliva virgen extra', 8.0,null);
+INSERT INTO products(product_id, name, price, "section") VALUES(6,'Yogur natural', 1.5,null);
+INSERT INTO products(product_id, name, price, "section") VALUES(7, 'Pack Agua 6 ',6.0,null);
+INSERT INTO products(product_id, name, price, "section") VALUES(8,'Zumo de naranja natural', 3.0,null);
+INSERT INTO products(product_id, name, price, "section") VALUES(9,'Helado chocolate y vainilla', 3.2,1);
+INSERT INTO products(product_id, name, price, "section")VALUES(10,'Mochis pistacho', 3.5,null);
+
+
+INSERT INTO public.stores (address, description) VALUES('Tienda Calle Alquerias', 'tienda');
+INSERT INTO public.stores (address, description) VALUES('Tienda Casa de Javier Merce', 'Peor tienda');
+INSERT INTO public.stores (address, description) VALUES('Tienda Casa de Mi casa', 'Mejor tienda');
+
+INSERT INTO public.racks (capacity, rack_id, store_id, "section") VALUES(40, 1, 1, '1');
+INSERT INTO public.racks (capacity, rack_id, store_id, "section") VALUES(15, 2, 1, '2');
+INSERT INTO public.racks (capacity, rack_id, store_id, "section") VALUES(12, 3, 1, '3');
+INSERT INTO public.racks (capacity, rack_id, store_id, "section") VALUES(1000, 4, 1, null);
+
+INSERT INTO public.stock_rack (quantity, product_id, rack_id, store_id) VALUES(4, 3, 2, 1);
+INSERT INTO public.stock_rack (quantity, product_id, rack_id, store_id) VALUES(5, 4, 3, 1);
+
+INSERT INTO public.warehouse_zone (capacity, store_id, description) VALUES(50, 1, 'Zona de almacenaje CREADA AL EMPEZAR');
+
+
+INSERT INTO public.stock_warehouse (quantity, product_id, store_id, warehouse_id) VALUES(12, 1, 1, 1);
+INSERT INTO public.stock_warehouse (quantity, product_id, store_id, warehouse_id) VALUES(12, 2, 1, 1);
+INSERT INTO public.stock_warehouse (quantity, product_id, store_id, warehouse_id) VALUES(12, 5, 1, 1);
+INSERT INTO public.stock_warehouse (quantity, product_id, store_id, warehouse_id) VALUES(12, 7, 1, 1);
+
+
+
+
+
+

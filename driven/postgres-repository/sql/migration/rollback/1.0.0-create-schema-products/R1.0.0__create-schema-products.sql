@@ -1,18 +1,17 @@
+DROP TABLE public.products CASCADE;
 
--- ==========================
--- Eliminar tabla order_lines
--- ==========================
-DROP TABLE IF EXISTS order_lines;
+DROP TABLE public.racks CASCADE;
 
--- ==========================
--- Eliminar tabla orders
--- ==========================
-DROP TABLE IF EXISTS orders;
+DROP TABLE public.revinfo CASCADE;
 
--- ==========================
--- Eliminar tabla products
--- ==========================
-DROP TABLE IF EXISTS products;
+DROP TABLE public.stock_rack CASCADE;
 
+DROP TABLE public.stock_warehouse CASCADE;
 
-DELETE FROM flyway_schema_history WHERE version = '1.0.0';
+DROP TABLE public.stores CASCADE;
+
+DROP TABLE public.stores_h CASCADE;
+
+DROP TABLE public.usuarios CASCADE;
+
+DROP TABLE public.warehouse_zone CASCADE;
