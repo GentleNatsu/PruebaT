@@ -11,6 +11,12 @@ spring:
     password: root
     driver-class-name: org.postgresql.Driver
   jpa:
+    properties:
+      org:
+        hibernate:
+          envers:
+            audit_table_suffix: _h
+            store_data_at_delete: true
     show-sql: true
     hibernate:
       format_sql: false

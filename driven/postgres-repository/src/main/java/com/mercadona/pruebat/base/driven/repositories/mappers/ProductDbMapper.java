@@ -1,20 +1,28 @@
 package com.mercadona.pruebat.base.driven.repositories.mappers;
 
-import com.mercadona.framework.cna.commons.domain.MercadonaPage;
+import com.mercadona.pruebat.base.domain.SectionType;
 import com.mercadona.pruebat.base.domain.products.Product;
 import com.mercadona.pruebat.base.driven.repositories.models.products.ProductMO;
 import org.mapstruct.Mapper;
-import org.springframework.data.domain.Page;
+import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = OrderDbMapper.class)
+@Mapper(componentModel = "spring")
 public interface ProductDbMapper {
 
-  default MercadonaPage<Product> toDomain(Page<ProductMO> pageMO) {
-    var page = pageMO.map(this::toDomain);
-    return MercadonaPage.of(page);
-  }
-
+  @Mapping(source = "section", target = "sectionType")
   Product toDomain(ProductMO productMO);
 
+  @Mapping(target = "section", source = "sectionType")
   ProductMO toDb(Product product);
+
+  default SectionType toSectionType(String section) {
+    return SectionType.getTipo(section);
+  }
+
+  default String toSectionType(SectionType section) {
+    if (section == null || SectionType.NONE.equals(section)) {
+      return null;
+    }
+    return section.getCodigo();
+  }
 }

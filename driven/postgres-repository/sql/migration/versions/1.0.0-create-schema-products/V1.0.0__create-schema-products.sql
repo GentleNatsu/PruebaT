@@ -1,19 +1,3 @@
--- public.orders definition
-
--- Drop table
-
--- DROP TABLE public.orders;
-
-CREATE TABLE public.orders (
-	order_id int8 NOT NULL,
-	address varchar(255) NULL,
-	customer_id varchar(255) NULL,
-	priority int4 NULL,
-	store_id varchar(255) NULL,
-	CONSTRAINT pk_orders PRIMARY KEY (order_id)
-);
-
-
 -- public.products definition
 
 -- Drop table
@@ -21,11 +5,11 @@ CREATE TABLE public.orders (
 -- DROP TABLE public.products;
 
 CREATE TABLE public.products (
+	price float4 NULL,
 	product_id int8 NOT NULL,
-	"name" varchar(255) NOT NULL,
-	price float4 NOT NULL,
-	created_at timestamptz NULL,
-	CONSTRAINT pk_products PRIMARY KEY (product_id)
+	"name" varchar(255) NULL,
+	"section" varchar(255) NULL,
+	CONSTRAINT products_pkey PRIMARY KEY (product_id)
 );
 
 
@@ -42,69 +26,100 @@ CREATE TABLE public.stores (
 	CONSTRAINT stores_pkey PRIMARY KEY (store_id)
 );
 
-CREATE SEQUENCE stores_seq START 1;
 
-
-
--- public.usuarios definition
+-- public.racks definition
 
 -- Drop table
 
--- DROP TABLE public.usuarios;
+-- DROP TABLE public.racks;
 
-CREATE TABLE public.usuarios (
-	username varchar(255) NOT NULL,
-	"password" varchar(255) NULL,
-	rol varchar(255) NULL DEFAULT USER,
-	CONSTRAINT usuarios_pkey PRIMARY KEY (username)
-);
-
-
--- public.order_lines definition
-
--- Drop table
-
--- DROP TABLE public.order_lines;
-
-CREATE TABLE public.order_lines (
-	line_id int8 NOT NULL,
-	order_id int8 NOT NULL,
-	product_id int8 NOT NULL,
-	quantity int4 NOT NULL,
-	unit_price float4 NOT NULL,
-	CONSTRAINT pk_order_lines PRIMARY KEY (line_id),
-	CONSTRAINT fk_order_lines_order FOREIGN KEY (order_id) REFERENCES public.orders(order_id) ON DELETE CASCADE,
-	CONSTRAINT fk_order_lines_product FOREIGN KEY (product_id) REFERENCES public.products(product_id)
-);
-
-
--- public.store_products definition
-
--- Drop table
-
--- DROP TABLE public.store_products;
-
-CREATE TABLE public.store_products (
-	product_id int8 NOT NULL,
-	store_id bigserial NOT NULL,
-	quantity int4 NULL,
-	CONSTRAINT store_products_pkey PRIMARY KEY (product_id, store_id),
-	CONSTRAINT fk_store_products_product FOREIGN KEY (product_id) REFERENCES public.products(product_id),
-	CONSTRAINT fk_store_products_store FOREIGN KEY (store_id) REFERENCES public.stores(store_id)
-);
-
-
--- public.vehicles definition
-
--- Drop table
-
--- DROP TABLE public.vehicles;
-
-CREATE TABLE public.vehicles (
-	vehicle_id int8 NOT NULL,
+CREATE TABLE public.racks (
 	capacity int4 NULL,
-	store_id bigserial not NULL,
-	"type" varchar(255) NULL,
-	CONSTRAINT vehicles_pkey PRIMARY KEY (vehicle_id),
-	CONSTRAINT fk_vehicles_store FOREIGN KEY (store_id) REFERENCES public.stores(store_id)
+	rack_id int8 NOT NULL,
+	store_id int8 NULL,
+	"section" varchar(255) NULL,
+	CONSTRAINT racks_pkey PRIMARY KEY (rack_id),
+	CONSTRAINT fkew7m6yup8tg2v1vwv07m1di5y FOREIGN KEY (store_id) REFERENCES public.stores(store_id)
+);
+
+
+-- public.stock_rack definition
+
+-- Drop table
+
+-- DROP TABLE public.stock_rack;
+
+CREATE TABLE public.stock_rack (
+	quantity int4 NULL,
+	product_id int8 NOT NULL,
+	rack_id int8 NOT NULL,
+	store_id int8 NOT NULL,
+	CONSTRAINT stock_rack_pkey PRIMARY KEY (product_id, rack_id, store_id),
+	CONSTRAINT fk3ge5dcdqqp540sskn5mlelndm FOREIGN KEY (rack_id) REFERENCES public.racks(rack_id),
+	CONSTRAINT fk8fdx7lfnaot3c7xjy6fw25bdr FOREIGN KEY (store_id) REFERENCES public.stores(store_id),
+	CONSTRAINT fkiscarop6jhg9du8tbvyi2xtey FOREIGN KEY (product_id) REFERENCES public.products(product_id)
+);
+
+
+-- public.warehouse_zone definition
+
+-- Drop table
+
+-- DROP TABLE public.warehouse_zone;
+
+CREATE TABLE public.warehouse_zone (
+	capacity int4 NULL,
+	store_id int8 NULL,
+	warehouse_id bigserial NOT NULL,
+	description varchar(255) NULL,
+	CONSTRAINT warehouse_zone_pkey PRIMARY KEY (warehouse_id),
+	CONSTRAINT fk5yt143dbeqep3x9kdl1lrtf7x FOREIGN KEY (store_id) REFERENCES public.stores(store_id)
+);
+
+
+-- public.stock_warehouse definition
+
+-- Drop table
+
+-- DROP TABLE public.stock_warehouse;
+
+CREATE TABLE public.stock_warehouse (
+	quantity int4 NULL,
+	product_id int8 NOT NULL,
+	store_id int8 NOT NULL,
+	warehouse_id int8 NOT NULL,
+	CONSTRAINT stock_warehouse_pkey PRIMARY KEY (product_id, store_id, warehouse_id),
+	CONSTRAINT fk1stiqwgahjh2upg7sg1cw3789 FOREIGN KEY (warehouse_id) REFERENCES public.warehouse_zone(warehouse_id),
+	CONSTRAINT fk69s2njrwmciv65wr0xxe1e5m8 FOREIGN KEY (store_id) REFERENCES public.stores(store_id),
+	CONSTRAINT fkigryw6miwtvivnb93g7nqjqcc FOREIGN KEY (product_id) REFERENCES public.products(product_id)
+);
+
+
+-- public.revinfo definition
+
+-- Drop table
+
+-- DROP TABLE public.revinfo;
+
+CREATE TABLE public.revinfo (
+	rev int4 NOT NULL,
+	revtstmp int8 NULL,
+	CONSTRAINT revinfo_pkey PRIMARY KEY (rev)
+);
+
+
+-- public.stores_h definition
+
+-- Drop table
+
+-- DROP TABLE public.stores_h;
+
+CREATE TABLE public.stores_h (
+	store_id int8 NOT NULL,
+	rev int4 NOT NULL,
+	revtype int2 NULL,
+	address varchar(255) NULL,
+	description varchar(255) NULL,
+	CONSTRAINT stores_h_pkey PRIMARY KEY (rev, store_id),
+	CONSTRAINT fkoxvqian1g7as3bu0ktgto890n FOREIGN KEY (rev) REFERENCES public.revinfo(rev)
 );

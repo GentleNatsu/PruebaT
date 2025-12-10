@@ -1,15 +1,13 @@
 package com.mercadona.pruebat.base.driven.repositories.models.products;
 
-import com.mercadona.pruebat.base.driven.repositories.models.orders.OrderLineMO;
-import com.mercadona.pruebat.base.driven.repositories.models.stores.StoreProductsMO;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.OffsetDateTime;
-import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -25,14 +23,7 @@ public class ProductMO {
   private String name;
   @Column(name = "price")
   private Float price;
-
-  @Column(name = "created_at")
-  private OffsetDateTime createdAt;
-
-  @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-  private Set<OrderLineMO> orderLines;
-
-  @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-  private Set<StoreProductsMO> storeProductsMOS;
+  @Column(name = "section")
+  private String section;
 
 }

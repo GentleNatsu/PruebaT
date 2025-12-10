@@ -1,14 +1,12 @@
 package com.mercadona.pruebat.base.driven.repositories.mappers;
 
 import com.mercadona.framework.cna.commons.domain.MercadonaPage;
-import com.mercadona.pruebat.base.domain.products.Product;
 import com.mercadona.pruebat.base.domain.stores.Store;
-import com.mercadona.pruebat.base.driven.repositories.models.products.ProductMO;
 import com.mercadona.pruebat.base.driven.repositories.models.stores.StoreMO;
 import org.mapstruct.Mapper;
 import org.springframework.data.domain.Page;
 
-@Mapper(componentModel = "spring", uses = OrderDbMapper.class)
+@Mapper(componentModel = "spring")
 public interface StoreDbMapper {
 
   default MercadonaPage<Store> toDomain(Page<StoreMO> pageMO) {

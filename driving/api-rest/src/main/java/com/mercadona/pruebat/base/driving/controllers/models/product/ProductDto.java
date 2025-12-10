@@ -1,16 +1,10 @@
 package com.mercadona.pruebat.base.driving.controllers.models.product;
 
-import com.mercadona.pruebat.base.driving.controllers.models.order.OrderLineDto;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.OffsetDateTime;
-import java.util.Set;
 
 @Data
 @Builder
@@ -24,10 +18,7 @@ public class ProductDto {
   private Integer quantity;
   @NotNull
   private Float price;
-  @NotNull
-  private OffsetDateTime createdAt;
 
 
-  private Set<OrderLineDto> orderLines;
 }
  

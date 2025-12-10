@@ -1,10 +1,13 @@
 package com.mercadona.pruebat.base.domain.stores;
 
-import com.mercadona.pruebat.base.domain.vehicles.Vehicle;
-import lombok.*;
+import com.mercadona.pruebat.base.domain.racks.Rack;
+import com.mercadona.pruebat.base.domain.warehousezones.WarehouseZone;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Builder
@@ -16,8 +19,8 @@ public class Store {
     private String description;
     private String address;
 
-    private List<StoreProduct> products;
-    private List<Vehicle> vehicles;
+    private List<WarehouseZone> warehouseZones;
+    private List<Rack> racks;
 
 
 }

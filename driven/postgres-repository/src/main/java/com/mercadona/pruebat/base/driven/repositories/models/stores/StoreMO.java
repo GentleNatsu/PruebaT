@@ -1,12 +1,15 @@
 package com.mercadona.pruebat.base.driven.repositories.models.stores;
 
-import com.mercadona.pruebat.base.driven.repositories.models.orders.OrderLineMO;
-import com.mercadona.pruebat.base.driven.repositories.models.vehicles.VehicleMO;
+import com.mercadona.pruebat.base.driven.repositories.models.rack.RackMO;
+import com.mercadona.pruebat.base.driven.repositories.models.warehouse.StockWarehouseMO;
+import com.mercadona.pruebat.base.driven.repositories.models.warehouse.WarehouseZoneMO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 import java.util.Set;
 
@@ -16,6 +19,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Audited
 public class StoreMO {
 
     @Id
@@ -32,9 +36,12 @@ public class StoreMO {
     private String address;
 
     @OneToMany(mappedBy = "storeMO", fetch = FetchType.LAZY)
-    private Set<StoreProductsMO> storeProductsMOS;
+    @NotAudited
+    private Set<RackMO> rackMOS;
+
     @OneToMany(mappedBy = "storeMO", fetch = FetchType.LAZY)
-    private Set<VehicleMO> vehicleMOS;
+    @NotAudited
+    private Set<WarehouseZoneMO> warehouseZoneMOS;
 
 
 }

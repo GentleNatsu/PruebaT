@@ -1,13 +1,10 @@
 package com.mercadona.pruebat.base.domain.products;
 
-import com.mercadona.pruebat.base.domain.orders.OrderLine;
+import com.mercadona.pruebat.base.domain.SectionType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.OffsetDateTime;
-import java.util.Set;
 
 @Data
 @Builder
@@ -17,7 +14,6 @@ public class Product {
   private Long id;
   private String name;
   private Float price;
-  private OffsetDateTime createdAt;
+  private SectionType sectionType;
 
-  private Set<OrderLine> orderLines;
 }

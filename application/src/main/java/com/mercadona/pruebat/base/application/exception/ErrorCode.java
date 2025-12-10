@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum ErrorCode {
 
     PROVETA_ERROR("T-01"),
-    TOKEN_ERROR("T-02");
+    TOKEN_ERROR("T-02"),
+    STORE_DOES_NOT_EXISTS("T-02");
 
     private final String errorCode;
 

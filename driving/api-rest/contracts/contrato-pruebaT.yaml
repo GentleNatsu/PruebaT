@@ -7,12 +7,6 @@ servers:
   - url: http://localhost:8080
     description: Generated server url
 tags:
-  - name: Product Api
-    description: Product api
-  - name: Authentication Api
-    description: Authentication api
-  - name: ProvetaApi
-    description: ProvetaApi
   - name: Stores Api
     description: Stores api
 paths:
@@ -41,7 +35,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/StoreDtoWithProducts"
+                $ref: "#/components/schemas/StoreDto"
     put:
       tags:
         - Stores Api
@@ -58,7 +52,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/StoreDto"
+              $ref: "#/components/schemas/StoreDtoUpdate"
         required: true
       responses:
         "422":
@@ -73,7 +67,7 @@ paths:
       tags:
         - Stores Api
       summary: Delete a store
-      operationId: deleteProduct
+      operationId: deleteStore
       parameters:
         - name: id
           in: path
@@ -81,107 +75,6 @@ paths:
           schema:
             type: integer
             format: int64
-      responses:
-        "422":
-          description: Unprocessable Entity
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/ErrorResourceResponse"
-        "200":
-          description: OK
-  /api/v1/products/{id}:
-    get:
-      tags:
-        - Product Api
-      summary: Get one product by id
-      operationId: getById_1
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        "422":
-          description: Unprocessable Entity
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/ErrorResourceResponse"
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/ProductDto"
-    put:
-      tags:
-        - Product Api
-      summary: Update a product
-      operationId: updateProduct
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ProductDto"
-        required: true
-      responses:
-        "422":
-          description: Unprocessable Entity
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/ErrorResourceResponse"
-        "200":
-          description: OK
-    delete:
-      tags:
-        - Product Api
-      summary: Delete a product
-      operationId: deleteProduct_1
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        "422":
-          description: Unprocessable Entity
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/ErrorResourceResponse"
-        "200":
-          description: OK
-    patch:
-      tags:
-        - Product Api
-      summary: Patch a product
-      operationId: patchProduct
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ProductDto"
-        required: true
       responses:
         "422":
           description: Unprocessable Entity
@@ -215,7 +108,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/PageResponseDtoStoreDtoWithProducts"
+                $ref: "#/components/schemas/PageResponseDtoStoreDto"
     post:
       tags:
         - Stores Api
@@ -226,30 +119,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/StoreDto"
-        required: true
-      responses:
-        "422":
-          description: Unprocessable Entity
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/ErrorResourceResponse"
-        "200":
-          description: OK
-  /api/v1/products/delete:
-    post:
-      tags:
-        - Product Api
-      summary: Delete a product
-      operationId: deleteListOfProducts
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                type: integer
-                format: int64
         required: true
       responses:
         "422":
@@ -278,17 +147,19 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/ErrorResourceResponse"
-  /auth/login:
+  /api/v1/stores/{id}/stock:
     get:
       tags:
-        - Authentication Api
-      operationId: login
+        - Stores Api
+      summary: Get stocks
+      operationId: getStock
       parameters:
-        - name: requestDto
-          in: query
+        - name: id
+          in: path
           required: true
           schema:
-            $ref: "#/components/schemas/LoginRequestDto"
+            type: integer
+            format: int64
       responses:
         "422":
           description: Unprocessable Entity
@@ -301,37 +172,20 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/LoginResponseDto"
-  /api/v1/proveta:
+                $ref: "#/components/schemas/StoreDtoExtended"
+  /api/v1/stores/{id}/gaps:
     get:
       tags:
-        - ProvetaApi
-      operationId: proveta
-      responses:
-        "422":
-          description: Unprocessable Entity
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/ErrorResourceResponse"
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                type: string
-  /api/v1/products:
-    get:
-      tags:
-        - Product Api
-      summary: Get all products
-      operationId: getAll_1
+        - Stores Api
+      summary: Get gaps
+      operationId: getGaps
       parameters:
-        - name: queryDto
-          in: query
+        - name: id
+          in: path
           required: true
           schema:
-            $ref: "#/components/schemas/ProductQueryDto"
+            type: integer
+            format: int64
       responses:
         "422":
           description: Unprocessable Entity
@@ -344,7 +198,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/PageResponseDtoProductDto"
+                $ref: "#/components/schemas/StoreDtoExtended"
 components:
   schemas:
     ErrorResource:
@@ -363,6 +217,27 @@ components:
       properties:
         error:
           $ref: "#/components/schemas/ErrorResource"
+    StoreDtoUpdate:
+      type: object
+      properties:
+        storeId:
+          type: integer
+          format: int64
+        description:
+          type: string
+        address:
+          type: string
+    RackDto:
+      type: object
+      properties:
+        rackId:
+          type: integer
+          format: int64
+        capacity:
+          type: integer
+          format: int32
+        section:
+          type: string
     StoreDto:
       type: object
       properties:
@@ -373,97 +248,11 @@ components:
           type: string
         address:
           type: string
-        vehicleDtos:
+        rackDtos:
           uniqueItems: true
           type: array
           items:
-            $ref: "#/components/schemas/VehicleDto"
-    VehicleDto:
-      type: object
-      properties:
-        vehicleId:
-          type: integer
-          format: int64
-        storeId:
-          type: integer
-          format: int64
-        type:
-          type: string
-        capacity:
-          type: integer
-          format: int32
-    OrderDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        customerName:
-          type: string
-        customerEmail:
-          type: string
-        orderDate:
-          type: string
-        status:
-          type: string
-        total:
-          type: number
-          format: float
-    OrderLineDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        orderId:
-          type: integer
-          format: int64
-        productId:
-          type: integer
-          format: int64
-        quantity:
-          type: integer
-          format: int32
-        unitPrice:
-          type: number
-          format: float
-        order:
-          $ref: "#/components/schemas/OrderDto"
-    ProductDto:
-      required:
-        - createdAt
-        - id
-        - price
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        price:
-          type: number
-          format: float
-        createdAt:
-          type: string
-          format: date-time
-        orderLines:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: "#/components/schemas/OrderLineDto"
-    LoginRequestDto:
-      type: object
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-    LoginResponseDto:
-      type: object
-      properties:
-        token:
-          type: string
+            $ref: "#/components/schemas/RackDto"
     StoreQueryDto:
       type: object
       properties:
@@ -477,12 +266,7 @@ components:
           type: string
         name:
           type: string
-        description:
-          type: string
-        price:
-          type: number
-          format: float
-    PageResponseDtoStoreDtoWithProducts:
+    PageResponseDtoStoreDto:
       type: object
       properties:
         pagination:
@@ -490,7 +274,7 @@ components:
         data:
           type: array
           items:
-            $ref: "#/components/schemas/StoreDtoWithProducts"
+            $ref: "#/components/schemas/StoreDto"
     Pagination:
       type: object
       properties:
@@ -510,7 +294,46 @@ components:
           type: string
         previousPage:
           type: string
-    StoreDtoWithProducts:
+    RackDtoWithStock:
+      type: object
+      properties:
+        rackId:
+          type: integer
+          format: int64
+        capacity:
+          type: integer
+          format: int32
+        section:
+          type: string
+        stockRackDtos:
+          type: array
+          items:
+            $ref: "#/components/schemas/StockRackDto"
+    StockRackDto:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+        storeId:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int32
+    StockWarehouseDto:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+        storeId:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int32
+    StoreDtoExtended:
       type: object
       properties:
         storeId:
@@ -520,43 +343,32 @@ components:
           type: string
         address:
           type: string
-        vehicleDtos:
+        rackDtos:
           uniqueItems: true
           type: array
           items:
-            $ref: "#/components/schemas/VehicleDto"
-        productDtos:
+            $ref: "#/components/schemas/RackDtoWithStock"
+        warehouseDtos:
           uniqueItems: true
           type: array
           items:
-            $ref: "#/components/schemas/ProductDto"
-    ProductQueryDto:
+            $ref: "#/components/schemas/WarehouseDtoWithStock"
+    WarehouseDtoWithStock:
       type: object
       properties:
-        page:
+        productId:
+          type: integer
+          format: int64
+        storeId:
+          type: integer
+          format: int64
+        quantity:
           type: integer
           format: int32
-        pageSize:
-          type: integer
-          format: int32
-        order:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        price:
-          type: number
-          format: float
-    PageResponseDtoProductDto:
-      type: object
-      properties:
-        pagination:
-          $ref: "#/components/schemas/Pagination"
-        data:
+        stockWarehouseDtos:
           type: array
           items:
-            $ref: "#/components/schemas/ProductDto"
+            $ref: "#/components/schemas/StockWarehouseDto"
   securitySchemes:
     adfs:
       type: oauth2

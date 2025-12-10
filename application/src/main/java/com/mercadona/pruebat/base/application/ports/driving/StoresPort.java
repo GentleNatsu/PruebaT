@@ -18,4 +18,9 @@ public interface StoresPort {
     void delete(Long id);
 
 
+    Store getStock(Long id);
+
+    Store getGaps(Long id);
+
+    String getStockCsv(Long id);
 }

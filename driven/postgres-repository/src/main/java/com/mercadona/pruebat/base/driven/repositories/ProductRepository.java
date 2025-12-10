@@ -9,11 +9,11 @@ import java.util.Collection;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<ProductMO, Long>, JpaSpecificationExecutor<ProductMO> {
-  @Query("""
-            SELECT DISTINCT p FROM ProductMO p
-            LEFT JOIN FETCH p.orderLines ol
-            LEFT JOIN FETCH ol.order
-            WHERE p.id IN :ids
-        """)
-  Collection<ProductMO> findAllByIdInWithOrderLinesAndOrders(List<Long> ids);
+//  @Query("""
+//            SELECT DISTINCT p FROM ProductMO p
+//            LEFT JOIN FETCH p.orderLines ol
+//            LEFT JOIN FETCH ol.order
+//            WHERE p.id IN :ids
+//        """)
+//  Collection<ProductMO> findAllByIdInWithOrderLinesAndOrders(List<Long> ids);
 }
